@@ -26,6 +26,7 @@ export default function Home() {
       console.warn(error.message)
     }
   }
+
   return (
     <Container maxWidth='100vw'>
       <Head>
@@ -41,6 +42,8 @@ export default function Home() {
           </SignedOut>
           <SignedIn>
             <UserButton />
+            <Button color="inherit" href="/generate">Generate</Button>
+            <Button color="inherit" href="/flashcards">Flashcards</Button>
           </SignedIn>
         </Toolbar>
       </AppBar>

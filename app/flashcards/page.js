@@ -5,7 +5,9 @@ import { useEffect, useState } from "react"
 import { collection, CollectionReference, doc, getDoc, setDoc } from "firebase/firestore"
 import { db } from "@/firebase"
 import { useRouter  } from "next/navigation"
-import { Card, CardActionArea, CardContent, Container, Grid, Typography } from "@mui/material"
+import { Card, CardActionArea, CardContent, Container, Grid, Typography, AppBar, Toolbar, Button } from "@mui/material"
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+
 
 export default function Flashcards() {
   const{isLoaded, isSignedIn, user} = useUser()
@@ -35,6 +37,15 @@ export default function Flashcards() {
   }
 
   return(<Container maxWidth='100vw'>
+    <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" style={{flexGrow: 1}}>Flashcard SaaS</Typography>
+          <SignedIn>
+            <UserButton />
+            <Button color="inherit" href="/flashcards">Flashcards</Button>
+          </SignedIn>
+        </Toolbar>
+      </AppBar>
     <Grid container spacing={3} sx={{mt:4}}>
       {flashcards.map((flashcard, index)=>(
         <Grid item xs={12} sm={6} md={4} key={index}>

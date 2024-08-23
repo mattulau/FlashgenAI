@@ -5,7 +5,8 @@ import { useState } from "react"
 import { useUser } from "@clerk/nextjs"
 import { useRouter } from "next/navigation"
 import { writeBatch, getDoc, doc, collection, setDoc } from "firebase/firestore"
-import { Container, Box, Typography, Paper, TextField, Button, Grid, Card, CardActionArea, CardContent, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from "@mui/material"
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { Typography, Paper, TextField, Grid, Card, CardActionArea, CardContent, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, AppBar, Box, Button, Container, Toolbar } from "@mui/material"
 
 export default function Generate() {
   const {isLoaded, isSignedIn, user} = useUser()
@@ -73,6 +74,15 @@ export default function Generate() {
     router.push('/flashcards')
   }
   return <Container maxWidth="md">
+    <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" style={{flexGrow: 1}}>Flashcard SaaS</Typography>
+          <SignedIn>
+            <UserButton />
+            <Button color="inherit" href="/flashcards">Flashcards</Button>
+          </SignedIn>
+        </Toolbar>
+      </AppBar>
     <Box sx={{mt: 4, mb: 6, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
       <Typography variant="h4">Generate Flashcards</Typography>
       <Paper sx={{p: 4, width:"100%"}}>
